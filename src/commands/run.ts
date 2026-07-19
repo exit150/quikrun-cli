@@ -28,12 +28,12 @@ export async function run(options: RunOptions): Promise<void> {
   const code = source.replace(/\n$/, "");
   const method = (options.method ?? "GET").toUpperCase();
 
-  // Parse the body up front so bad JSON fails fast with a clear message.
-  let body: unknown;
+  // Validate the body up front so bad JSON fails fast — but send the RAW string:
+  // the run route expects `body` as a string and parses it server-side per bodyType.
   let bodyType: "JSON" | "None" = "None";
   if (options.body !== undefined) {
     try {
-      body = JSON.parse(options.body);
+      JSON.parse(options.body);
     } catch {
       fail(`--body is not valid JSON: ${options.body}`);
     }
@@ -45,7 +45,7 @@ export async function run(options: RunOptions): Promise<void> {
 
   const result = await apiRequest<RunResponse>(`/api/snippets/${slug}/run`, {
     method: "POST",
-    body: { code, method, body, bodyType },
+    body: { code, method, body: options.body, bodyType },
   });
 
   // --- Status ----------------------------------------------------------
