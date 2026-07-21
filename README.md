@@ -108,6 +108,18 @@ List every snippet in your team.
 
 Show recent run and deploy events for your team.
 
+### `quikrun mcp install [client]`
+
+Connect the QuikRun MCP server (`https://mcp.quik.run`) to your AI client so an agent can create, run, and deploy snippets for you. Uses your logged-in token automatically, so there's nothing to paste.
+
+```bash
+quikrun mcp install            # interactive picker
+quikrun mcp install claude     # or: cursor | vscode | windsurf | zed
+quikrun mcp print cursor       # show the config without writing it
+```
+
+Claude Code and VS Code are configured through their own CLIs; Cursor, Windsurf, and Zed by merging their JSON config (existing servers are preserved). Restart the client afterwards.
+
 ## What runs
 
 Snippets are single-file JavaScript or TypeScript that export a default `async handler(req, env)` and return JSON or an HTTP response. They execute in a sandbox at the edge and can `import` from a curated set of npm packages (dayjs, zod, cheerio, marked, and more), plus server-render HTML. See [quik.run](https://quik.run) for the current package list and limits.

@@ -16,13 +16,14 @@ import { pull } from "./commands/pull.js";
 import { run, type RunOptions } from "./commands/run.js";
 import { list } from "./commands/list.js";
 import { logs } from "./commands/logs.js";
+import { mcpInstall, mcpPrint } from "./commands/mcp.js";
 
 const program = new Command();
 
 program
   .name("quikrun")
   .description("Scaffold, deploy, and run QuikRun snippets from your terminal.")
-  .version("0.1.2");
+  .version("0.1.3");
 
 program
   .command("login")
@@ -66,6 +67,22 @@ program
   .command("logs")
   .description("Show recent run/deploy events for your team.")
   .action(() => run_(() => logs()));
+
+const mcp = program
+  .command("mcp")
+  .description("Connect the QuikRun MCP server to your AI client (Claude, Cursor, VS Code, Windsurf, Zed).");
+
+mcp
+  .command("install")
+  .description("Add the QuikRun MCP server to a client, using your logged-in token.")
+  .argument("[client]", "claude | cursor | vscode | windsurf | zed")
+  .action((client?: string) => run_(() => mcpInstall(client)));
+
+mcp
+  .command("print")
+  .description("Print a client's MCP config without writing anything.")
+  .argument("[client]", "claude | cursor | vscode | windsurf | zed")
+  .action((client?: string) => run_(() => mcpPrint(client)));
 
 /**
  * Run an async command handler and convert any thrown error into a clean,
