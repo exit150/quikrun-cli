@@ -1,6 +1,6 @@
 {
   "name": "quikrun",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "The QuikRun CLI. Scaffold, deploy, and run serverless snippets from your terminal.",
   "type": "module",
   "bin": {

@@ -46,6 +46,10 @@ export function slugify(input: string): string {
  * Mask a secret token for display, e.g. `quik_abcd1234...wxyz` becomes
  * `quik_abcd…wxyz`. Short tokens are only partially revealed.
  */
+/** How the CLI was invoked, so messages suggest the matching command. Running via npx executes
+ * from an "_npx" cache directory; a global/local install runs from a node_modules bin path. */
+export const CMD = (process.argv[1] ?? "").includes("_npx") ? "npx quikrun" : "quikrun";
+
 export function maskToken(token: string): string {
   if (token.length <= 12) return `${token.slice(0, 4)}…`;
   return `${token.slice(0, 9)}…${token.slice(-4)}`;

@@ -22,6 +22,9 @@ import type { Language } from "./util.js";
 /** Base URL of the QuikRun REST API. Overridable for local/staging testing. */
 export const API_URL = process.env.QUIKRUN_API_URL ?? "https://api.quik.run";
 
+/** Base URL of the QuikRun web app, used for the browser sign-in flow. */
+export const WEB_URL = process.env.QUIKRUN_WEB_URL ?? "https://quik.run";
+
 const CONFIG_DIR = join(homedir(), ".quikrun");
 const CONFIG_FILE = join(CONFIG_DIR, "config.json");
 

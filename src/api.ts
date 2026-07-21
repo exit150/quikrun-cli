@@ -9,6 +9,7 @@
 
 import pc from "picocolors";
 import { API_URL, readToken } from "./config.js";
+import { CMD } from "./util.js";
 
 /** Print a red error line and terminate the CLI with a failure code. */
 export function fail(message: string): never {
@@ -21,10 +22,8 @@ export function requireToken(): string {
   const token = readToken();
   if (!token) {
     console.error(pc.red("✖ You are not logged in."));
-    console.error(
-      `\nMint a token in the ${pc.bold("quik.run dashboard → Tokens")}, then run:\n`,
-    );
-    console.error(pc.cyan("  quikrun login <token>\n"));
+    console.error(`\nSign in with your browser:\n`);
+    console.error(pc.cyan(`  ${CMD} login\n`));
     process.exit(1);
   }
   return token;

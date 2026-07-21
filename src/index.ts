@@ -22,13 +22,13 @@ const program = new Command();
 program
   .name("quikrun")
   .description("Scaffold, deploy, and run QuikRun snippets from your terminal.")
-  .version("0.1.0");
+  .version("0.1.2");
 
 program
   .command("login")
-  .description("Save and validate an API token (mint one in quik.run → Tokens).")
-  .argument("<token>", "your quik_… API token")
-  .action((token: string) => run_(() => login(token)));
+  .description("Sign in with your browser (or pass a token to sign in headless).")
+  .argument("[token]", "optional quik_… API token")
+  .action((token?: string) => run_(() => login(token)));
 
 program
   .command("new")
