@@ -17,13 +17,15 @@ import { run, type RunOptions } from "./commands/run.js";
 import { list } from "./commands/list.js";
 import { logs } from "./commands/logs.js";
 import { mcpInstall, mcpPrint } from "./commands/mcp.js";
+import { upgrade } from "./commands/upgrade.js";
+import { VERSION } from "./version.js";
 
 const program = new Command();
 
 program
   .name("quikrun")
   .description("Scaffold, deploy, and run QuikRun snippets from your terminal.")
-  .version("0.1.3");
+  .version(VERSION);
 
 program
   .command("login")
@@ -83,6 +85,12 @@ mcp
   .description("Print a client's MCP config without writing anything.")
   .argument("[client]", "claude | cursor | vscode | windsurf | zed")
   .action((client?: string) => run_(() => mcpPrint(client)));
+
+program
+  .command("upgrade")
+  .alias("update")
+  .description("Update the CLI to the latest published version.")
+  .action(() => run_(() => upgrade()));
 
 /**
  * Run an async command handler and convert any thrown error into a clean,

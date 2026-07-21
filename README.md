@@ -120,6 +120,14 @@ quikrun mcp print cursor       # show the config without writing it
 
 Claude Code and VS Code are configured through their own CLIs; Cursor, Windsurf, and Zed by merging their JSON config (existing servers are preserved). Restart the client afterwards.
 
+### `quikrun upgrade`
+
+Update the CLI to the latest published version. It picks the right action for how you installed it — a global install is updated in place; run via npx (or `pnpm dlx`/`bunx`) and it just points you at `@latest`.
+
+```bash
+quikrun upgrade    # alias: quikrun update
+```
+
 ## What runs
 
 Snippets are single-file JavaScript or TypeScript that export a default `async handler(req, env)` and return JSON or an HTTP response. They execute in a sandbox at the edge and can `import` from a curated set of npm packages (dayjs, zod, cheerio, marked, and more), plus server-render HTML. See [quik.run](https://quik.run) for the current package list and limits.
